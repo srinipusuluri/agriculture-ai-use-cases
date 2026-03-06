@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Agriculture (AgTech) - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --secondary-color: #a3e635;
+            --accent-color: #f59e0b;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --agriculture-green: #22c55e;
+            --harvest-yellow: #f59e0b;
+            --soil-brown: #a3e635;
+            --farm-blue: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--agriculture-green), var(--harvest-yellow), var(--soil-brown));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--agriculture-green), var(--harvest-yellow));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--agriculture-green), var(--harvest-yellow), var(--soil-brown));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(34, 197, 94, 0.2); color: var(--agriculture-green); }
+        .icon.gen { background: rgba(163, 230, 53, 0.2); color: var(--soil-brown); }
+        .icon.ag { background: rgba(245, 158, 11, 0.2); color: var(--harvest-yellow); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--agriculture-green), var(--harvest-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--agriculture-green);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(163, 230, 53, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--agriculture-green);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--agriculture-green);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .agriculture-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .crop-badge {
+            background: rgba(163, 230, 53, 0.2);
+            color: #a3e635;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(163, 230, 53, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .livestock-badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌾 AI in Agriculture (AgTech)</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Farming & Food Production</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for crop optimization, livestock management, and sustainable agricultural practices
+            </p>
+
+            <div class="card-grid">
+                <!-- Crop Yield Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🌽</div>
+                        <div>
+                            <div class="card-title">Crop Yield Prediction</div>
+                            <div class="card-subtitle">Agricultural Forecasting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict crop yields based on weather patterns, soil conditions, and farming practices to optimize planting strategies and resource allocation.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Yield Modeling</span>
+                            <span class="tech-tag">Weather Analysis</span>
+                            <span class="tech-tag">Soil Analytics</span>
+                            <span class="tech-tag">Crop Monitoring</span>
+                            <span class="tech-tag">Resource Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Weather Data → Soil Conditions → Crop Health → Yield Prediction → Harvest Planning</div>
+                            <div class="architecture-item">Historical Yields → Farming Practices → Environmental Factors → Forecasting → Decision Support</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical crop yield data</li>
+                                <li>Weather patterns and forecasts</li>
+                                <li>Soil composition and health</li>
+                                <li>Crop variety characteristics</li>
+                                <li>Farming practices and inputs</li>
+                                <li>Pest and disease incidence</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Prediction Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-40%</div>
+                                <div class="metric-label">Yield Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Resource Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Impact Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🌤️</div>
+                        <div>
+                            <div class="card-title">Weather Impact Modeling</div>
+                            <div class="card-subtitle">Climate Risk Assessment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Model the impact of weather conditions on crop growth, livestock health, and farm operations to enable proactive risk management.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Climate Modeling</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Impact Analysis</span>
+                            <span class="tech-tag">Adaptation Planning</span>
+                            <span class="tech-tag">Mitigation Strategies</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Weather Data → Impact Analysis → Risk Assessment → Mitigation Planning → Implementation</div>
+                            <div class="architecture-item">Historical Patterns → Climate Trends → Farm Impact → Adaptation → Resilience</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical weather data</li>
+                                <li>Climate change projections</li>
+                                <li>Crop sensitivity to weather</li>
+                                <li>Livestock weather requirements</li>
+                                <li>Farm infrastructure data</li>
+                                <li>Regional climate patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Impact Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Risk Mitigation</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-45%</div>
+                                <div class="metric-label">Crop Loss</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pest Outbreak Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🐛</div>
+                        <div>
+                            <div class="card-title">Pest Outbreak Prediction</div>
+                            <div class="card-subtitle">Crop Protection</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict pest and disease outbreaks to enable early intervention and minimize crop damage while reducing pesticide use.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Pest Monitoring</span>
+                            <span class="tech-tag">Disease Detection</span>
+                            <span class="tech-tag">Environmental Analysis</span>
+                            <span class="tech-tag">Early Warning</span>
+                            <span class="tech-tag">Integrated Pest Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Environmental Data → Pest Monitoring → Outbreak Prediction → Intervention Planning → Control</div>
+                            <div class="architecture-item">Historical Patterns → Weather Conditions → Pest Lifecycle → Risk Assessment → Prevention</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Pest population monitoring</li>
+                                <li>Disease incidence data</li>
+                                <li>Weather and climate conditions</li>
+                                <li>Crop health indicators</li>
+                                <li>Pest lifecycle information</li>
+                                <li>Previous outbreak patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Outbreak Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Pesticide Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Crop Damage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soil Health Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🌱</div>
+                        <div>
+                            <div class="card-title">Soil Health Modeling</div>
+                            <div class="card-subtitle">Land Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Monitor and predict soil health parameters to optimize fertility management and ensure sustainable land use practices.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Soil Analysis</span>
+                            <span class="tech-tag">Nutrient Monitoring</span>
+                            <span class="tech-tag">Microbial Activity</span>
+                            <span class="tech-tag">Fertility Assessment</span>
+                            <span class="tech-tag">Sustainability Metrics</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Soil Sampling → Nutrient Analysis → Health Assessment → Management Planning → Improvement</div>
+                            <div class="architecture-item">Microbial Data → Organic Matter → pH Levels → Fertility → Crop Suitability</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Soil nutrient composition</li>
+                                <li>Microbial activity levels</li>
+                                <li>Organic matter content</li>
+                                <li>pH and acidity levels</li>
+                                <li>Soil texture and structure</li>
+                                <li>Previous crop history</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Health Assessment</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Fertilizer Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Soil Degradation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Irrigation Optimization -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">💧</div>
+                        <div>
+                            <div class="card-title">Irrigation Optimization</div>
+                            <div class="card-subtitle">Water Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize irrigation scheduling and water usage based on crop needs, weather conditions, and soil moisture levels.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Water Management</span>
+                            <span class="tech-tag">Soil Moisture</span>
+                            <span class="tech-tag">Crop Water Needs</span>
+                            <span class="tech-tag">Weather Integration</span>
+                            <span class="tech-tag">Efficiency Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Soil Moisture → Crop Needs → Weather Forecast → Irrigation Scheduling → Water Delivery</div>
+                            <div class="architecture-item">Sensor Data → Evapotranspiration → Water Balance → Optimization → Conservation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Soil moisture sensor data</li>
+                                <li>Crop water requirements</li>
+                                <li>Weather forecasts and evaporation</li>
+                                <li>Water availability and costs</li>
+                                <li>Irrigation system efficiency</li>
+                                <li>Soil water retention</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Water Savings</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-40%</div>
+                                <div class="metric-label">Crop Yield</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Energy Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livestock Health Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🐄</div>
+                        <div>
+                            <div class="card-title">Livestock Health Prediction</div>
+                            <div class="card-subtitle">Animal Care</div>
+                            <span class="livestock-badge">Livestock</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict livestock health issues and optimize feeding, breeding, and care practices to improve animal welfare and productivity.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Animal Health</span>
+                            <span class="tech-tag">Behavioral Analysis</span>
+                            <span class="tech-tag">Nutrition Optimization</span>
+                            <span class="tech-tag">Disease Prevention</span>
+                            <span class="tech-tag">Productivity Enhancement</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Health Monitoring → Behavior Analysis → Risk Assessment → Care Planning → Intervention</div>
+                            <div class="architecture-item">Feeding Patterns → Growth Tracking → Disease Detection → Treatment → Recovery</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Animal health records</li>
+                                <li>Feeding and nutrition data</li>
+                                <li>Behavioral monitoring</li>
+                                <li>Environmental conditions</li>
+                                <li>Breeding and genetics</li>
+                                <li>Disease incidence patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Health Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-45%</div>
+                                <div class="metric-label">Feed Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Mortality Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, farm management tools, and agricultural knowledge systems for modern farming
+            </p>
+
+            <div class="card-grid">
+                <!-- Farm Advisory Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Farm Advisory Reports</div>
+                            <div class="card-subtitle">Agricultural Consulting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive farm management reports with actionable insights for crop planning, resource allocation, and operational improvements.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Farm Analysis</span>
+                            <span class="tech-tag">Recommendations</span>
+                            <span class="tech-tag">Best Practices</span>
+                            <span class="tech-tag">Action Plans</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Farm Data → Analysis → Insights Generation → Report Creation → Recommendations → Implementation</div>
+                            <div class="architecture-item">Crop Performance → Resource Usage → Market Analysis → Strategic Planning → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Farm performance metrics</li>
+                                <li>Crop yield and quality data</li>
+                                <li>Resource consumption patterns</li>
+                                <li>Market price trends</li>
+                                <li>Weather and climate data</li>
+                                <li>Best practice guidelines</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Implementation Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crop Planning Guides -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🗺️</div>
+                        <div>
+                            <div class="card-title">Crop Planning Guides</div>
+                            <div class="card-subtitle">Planting Strategy</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Create detailed crop rotation and planting guides optimized for soil health, yield maximization, and market demand.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Crop Rotation</span>
+                            <span class="tech-tag">Planting Schedules</span>
+                            <span class="tech-tag">Soil Management</span>
+                            <span class="tech-tag">Market Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Soil Analysis → Crop Selection → Rotation Planning → Planting Schedule → Management → Harvest</div>
+                            <div class="architecture-item">Market Demand → Profitability → Risk Assessment → Implementation → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Soil nutrient analysis</li>
+                                <li>Crop compatibility data</li>
+                                <li>Market demand forecasts</li>
+                                <li>Climate suitability</li>
+                                <li>Pest and disease patterns</li>
+                                <li>Profitability analysis</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Planning Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Yield Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Soil Health</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sustainability Reporting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">♻️</div>
+                        <div>
+                            <div class="card-title">Sustainability Reporting</div>
+                            <div class="card-subtitle">Environmental Compliance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive sustainability reports documenting environmental impact, resource efficiency, and compliance with agricultural standards.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Environmental Metrics</span>
+                            <span class="tech-tag">Compliance Reporting</span>
+                            <span class="tech-tag">Carbon Footprint</span>
+                            <span class="tech-tag">Resource Tracking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Resource Usage → Environmental Impact → Compliance Check → Report Generation → Certification → Improvement</div>
+                            <div class="architecture-item">Carbon Emissions → Water Usage → Soil Health → Biodiversity → Sustainability → Reporting</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Resource consumption data</li>
+                                <li>Environmental impact metrics</li>
+                                <li>Compliance requirements</li>
+                                <li>Carbon footprint calculations</li>
+                                <li>Biodiversity indicators</li>
+                                <li>Sustainability benchmarks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Compliance Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Carbon Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farmer Chatbot Assistants -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🤖</div>
+                        <div>
+                            <div class="card-title">Farmer Chatbot Assistants</div>
+                            <div class="card-subtitle">Agricultural Support</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Provide 24/7 agricultural support and advice to farmers through conversational AI interfaces with local language support.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Agricultural Knowledge</span>
+                            <span class="tech-tag">Local Language</span>
+                            <span class="tech-tag">Problem Solving</span>
+                            <span class="tech-tag">Best Practices</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Farmer Query → Knowledge Retrieval → Local Context → Advice Generation → Implementation → Follow-up</div>
+                            <div class="architecture-item">Crop Issues → Pest Problems → Weather Concerns → Market Questions → Solutions → Support</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Agricultural best practices</li>
+                                <li>Local crop information</li>
+                                <li>Pest and disease knowledge</li>
+                                <li>Weather impact data</li>
+                                <li>Market price information</li>
+                                <li>Local language support</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Query Resolution</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">24/7</div>
+                                <div class="metric-label">Availability</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 seconds</div>
+                                <div class="metric-label">Response Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipment Manuals -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🛠️</div>
+                        <div>
+                            <div class="card-title">Equipment Manuals</div>
+                            <div class="card-subtitle">Farm Machinery</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive, easy-to-understand equipment manuals and maintenance guides for farm machinery and tools.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Technical Documentation</span>
+                            <span class="tech-tag">Maintenance Guides</span>
+                            <span class="tech-tag">Safety Instructions</span>
+                            <span class="tech-tag">Troubleshooting</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Equipment Specs → Manual Generation → Maintenance Schedules → Safety Guidelines → Troubleshooting → Updates</div>
+                            <div class="architecture-item">User Instructions → Parts Information → Service Procedures → Performance Tips → Documentation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Equipment specifications</li>
+                                <li>Manufacturer guidelines</li>
+                                <li>Maintenance procedures</li>
+                                <li>Safety requirements</li>
+                                <li>Troubleshooting guides</li>
+                                <li>Parts and components</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Manual Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Equipment Uptime</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Manual Creation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Materials -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🎓</div>
+                        <div>
+                            <div class="card-title">Training Materials</div>
+                            <div class="card-subtitle">Agricultural Education</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Create educational content and training materials for farmers on new technologies, sustainable practices, and modern farming techniques.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Educational Content</span>
+                            <span class="tech-tag">Training Modules</span>
+                            <span class="tech-tag">Best Practices</span>
+                            <span class="tech-tag">Skill Development</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Training Needs → Content Creation → Module Development → Delivery → Assessment → Improvement</div>
+                            <div class="architecture-item">Technology Training → Sustainable Practices → Safety Procedures → Skill Building → Certification</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Training curriculum requirements</li>
+                                <li>Technology specifications</li>
+                                <li>Sustainable practice guidelines</li>
+                                <li>Safety protocols</li>
+                                <li>Assessment criteria</li>
+                                <li>Learning outcomes</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Training Effectiveness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Adoption Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Content Creation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex agricultural operations and farm management workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Autonomous Irrigation Control Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">💧</div>
+                        <div>
+                            <div class="card-title">Autonomous Irrigation Control</div>
+                            <div class="card-subtitle">Smart Water Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically manage irrigation systems based on real-time soil moisture, weather conditions, and crop water requirements.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Smart Irrigation</span>
+                            <span class="tech-tag">Sensor Integration</span>
+                            <span class="tech-tag">Weather Monitoring</span>
+                            <span class="tech-tag">Crop Analysis</span>
+                            <span class="tech-tag">Water Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Soil Sensors → Weather Data → Crop Needs → Irrigation Control → Water Delivery → Monitoring</div>
+                            <div class="architecture-item">Moisture Levels → Evaporation Rates → Plant Requirements → System Control → Efficiency → Conservation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Soil moisture sensor networks</li>
+                                <li>Weather station data</li>
+                                <li>Crop water requirements</li>
+                                <li>Irrigation system specifications</li>
+                                <li>Water availability constraints</li>
+                                <li>Energy consumption data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Water Savings</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-40%</div>
+                                <div class="metric-label">Crop Yield</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Energy Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farm Operations Orchestration Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🚜</div>
+                        <div>
+                            <div class="card-title">Farm Operations Orchestration</div>
+                            <div class="card-subtitle">Integrated Farm Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Coordinate all farm operations including planting, harvesting, equipment scheduling, and resource allocation for optimal efficiency.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Operations Management</span>
+                            <span class="tech-tag">Resource Coordination</span>
+                            <span class="tech-tag">Equipment Scheduling</span>
+                            <span class="tech-tag">Task Optimization</span>
+                            <span class="tech-tag">Workflow Automation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Crop Planning → Equipment Scheduling → Labor Allocation → Task Execution → Monitoring → Optimization</div>
+                            <div class="architecture-item">Weather Conditions → Soil Status → Equipment Availability → Workforce → Operations → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Equipment inventory and status</li>
+                                <li>Labor availability and skills</li>
+                                <li>Crop calendar and requirements</li>
+                                <li>Weather forecasts</li>
+                                <li>Resource availability</li>
+                                <li>Operational constraints</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Operational Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-45%</div>
+                                <div class="metric-label">Labor Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Equipment Utilization</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pest Response Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🐛</div>
+                        <div>
+                            <div class="card-title">Pest Response</div>
+                            <div class="card-subtitle">Integrated Pest Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically detect, assess, and respond to pest infestations using integrated pest management strategies and precision application.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Pest Detection</span>
+                            <span class="tech-tag">Response Coordination</span>
+                            <span class="tech-tag">Precision Application</span>
+                            <span class="tech-tag">Monitoring</span>
+                            <span class="tech-tag">Prevention</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Pest Detection → Risk Assessment → Response Planning → Treatment → Monitoring → Prevention</div>
+                            <div class="architecture-item">Sensor Data → Population Analysis → Control Methods → Application → Effectiveness → Adjustment</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Pest detection sensor data</li>
+                                <li>Pest population monitoring</li>
+                                <li>Control method effectiveness</li>
+                                <li>Environmental impact data</li>
+                                <li>Crop damage assessment</li>
+                                <li>Prevention strategies</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Pest Control</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Pesticide Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Crop Damage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Precision Agriculture Drone Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🚁</div>
+                        <div>
+                            <div class="card-title">Precision Agriculture Drone</div>
+                            <div class="card-subtitle">Aerial Farm Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Deploy autonomous drones for crop monitoring, precision spraying, and field analysis to optimize agricultural operations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Drone Technology</span>
+                            <span class="tech-tag">Aerial Imaging</span>
+                            <span class="tech-tag">Precision Spraying</span>
+                            <span class="tech-tag">Field Analysis</span>
+                            <span class="tech-tag">Autonomous Navigation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Field Mapping → Drone Deployment → Data Collection → Analysis → Treatment → Monitoring</div>
+                            <div class="architecture-item">Crop Health → Pest Detection → Nutrient Analysis → Precision Application → Results → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Field mapping and boundaries</li>
+                                <li>Drone flight patterns</li>
+                                <li>Sensor specifications</li>
+                                <li>Crop health indicators</li>
+                                <li>Application requirements</li>
+                                <li>Weather constraints</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Coverage Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Input Reduction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-45%</div>
+                                <div class="metric-label">Labor Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Greenhouse Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🌿</div>
+                        <div>
+                            <div class="card-title">Smart Greenhouse</div>
+                            <div class="card-subtitle">Controlled Environment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Manage greenhouse environments including temperature, humidity, lighting, and nutrient delivery for optimal plant growth.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Environmental Control</span>
+                            <span class="tech-tag">Climate Management</span>
+                            <span class="tech-tag">Nutrient Delivery</span>
+                            <span class="tech-tag">Growth Optimization</span>
+                            <span class="tech-tag">Automation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Environmental Sensors → Climate Control → Nutrient Management → Growth Monitoring → Optimization → Harvest</div>
+                            <div class="architecture-item">Temperature → Humidity → Lighting → CO2 Levels → Nutrients → Plant Health</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Environmental sensor data</li>
+                                <li>Plant growth requirements</li>
+                                <li>Nutrient solution formulations</li>
+                                <li>Climate control systems</li>
+                                <li>Energy consumption data</li>
+                                <li>Harvest timing requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Yield Increase</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Resource Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-45%</div>
+                                <div class="metric-label">Energy Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farm-to-Market Logistics Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🚚</div>
+                        <div>
+                            <div class="card-title">Farm-to-Market Logistics</div>
+                            <div class="card-subtitle">Supply Chain Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize the entire supply chain from farm production to market delivery, including storage, transportation, and distribution.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Supply Chain</span>
+                            <span class="tech-tag">Logistics Optimization</span>
+                            <span class="tech-tag">Storage Management</span>
+                            <span class="tech-tag">Transportation</span>
+                            <span class="tech-tag">Market Distribution</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Harvest → Storage → Transportation → Distribution → Market → Sales → Feedback</div>
+                            <div class="architecture-item">Quality Control → Cold Chain → Route Optimization → Delivery → Retail → Consumer</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Harvest timing and volumes</li>
+                                <li>Storage facility capacity</li>
+                                <li>Transportation logistics</li>
+                                <li>Market demand patterns</li>
+                                <li>Quality requirements</li>
+                                <li>Distribution networks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Logistics Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Product Freshness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-45%</div>
+                                <div class="metric-label">Waste Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of sustainable agriculture</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of environmental impact, data privacy, and regulatory compliance
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
